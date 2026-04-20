@@ -7,7 +7,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-#define SERVER_IP "127.0.0.1"
+#define SERVER_IP "127.0.0.1" //do zmiany na ip płytki (serwera), sprawdzane ip a bądź ip addr
 #define SERVER_PORT 5001
 #define BUF_SIZE 256
 
