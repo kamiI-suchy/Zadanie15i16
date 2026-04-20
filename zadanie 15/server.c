@@ -20,7 +20,7 @@ int main(void) {
     int server_fd = socket(AF_UNIX, SOCK_STREAM, 0);
     if (server_fd == -1) {
         perror("socket");
-        return -1;
+        return 1;
     }
 
     struct sockaddr_un addr;
@@ -33,14 +33,14 @@ int main(void) {
     if (bind(server_fd, (const struct sockaddr *)&addr, sizeof(addr)) == -1) {
         perror("bind");
         close(server_fd);
-        return -1;
+        return 1;
     }
 
     if (listen(server_fd, 5) == -1) {
         perror("listen");
         close(server_fd);
         unlink(SOCKET_PATH);
-        return -1;
+        return 1;
     }
 
     printf("Serwer UNIX (zad15) nasluchuje na %s\n", SOCKET_PATH);
