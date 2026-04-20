@@ -15,7 +15,7 @@ int main(void) {
     int fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (fd == -1) {
         perror("socket");
-        return -1;
+        return 1;
     }
 
     struct sockaddr_in server_addr;
@@ -26,14 +26,14 @@ int main(void) {
     if (inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr) != 1) {
         fprintf(stderr, "Niepoprawny adres IP serwera: %s\n", SERVER_IP);
         close(fd);
-        return -1;
+        return 1;
     }
 
     const char *message = "Imię i nazwisko";
     if (sendto(fd, message, strlen(message), 0, (const struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
         perror("sendto");
         close(fd);
-        return -1;
+        return 1;
     }
 
     char response[BUF_SIZE];
@@ -44,7 +44,7 @@ int main(void) {
     if (received == -1) {
         perror("recvfrom");
         close(fd);
-        return -1;
+        return 1;
     }
 
     response[received] = '\0';
