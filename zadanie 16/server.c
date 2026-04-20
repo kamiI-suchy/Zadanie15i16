@@ -21,7 +21,7 @@ int main(void) {
     int fd = socket(AF_INET, SOCK_DGRAM, 0);
     if (fd == -1) {
         perror("socket");
-        return -1;
+        return 1;
     }
 
     struct sockaddr_in server_addr;
@@ -33,7 +33,7 @@ int main(void) {
     if (bind(fd, (const struct sockaddr *)&server_addr, sizeof(server_addr)) == -1) {
         perror("bind");
         close(fd);
-        return -1;
+        return 1;
     }
 
     printf("Serwer UDP (zad16) nasluchuje na porcie %d\n", SERVER_PORT);
